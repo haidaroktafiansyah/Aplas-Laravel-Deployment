@@ -31,20 +31,17 @@ class StudentMemberController extends Controller
       return view('teacher/member/index')->with($data);
   }
 
-  public function edit($id)
+  public function edit($name)
   {
-    /*
-      $teacher = Auth::user()->id;
-      $entity=new \App\StudentTeacher;
+    $entities=\App\User::where('users.uplink','=',Auth::user()->id)->where('users.status','=','active')
+    ->select('users.id', 'users.name', 'users.roleid', 'users.email','users.status')
+      ->where('users.name',$name)
+      ->orderBy('users.name','asc')
+      ->get();
 
-      $entity->student=$id;
-      $entity->teacher=$teacher;
-      $entity->save();
-
-      $user=\App\User::find($id);
-      Session::flash('message','Student with name = '.$user['name'].' is assgined');
-    */
-      return Redirect::to('teacher/assignstudent/index');
+    // dd($entities);
+    $data=['entity'=>$entities];
+    return view('teacher/editstudent/index')->with($data);
   }
 
   public function show()

@@ -26,6 +26,7 @@
                                 <th>Topic Submitted</th>
                                 <th>Topic Name(s)</th>
                                 <th>Action</th>
+                                <th>Detail</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +51,7 @@
                                       @endif
                                     </div>
                                 </td>
+                            <td class="text-center"><a href="/teacher/studentdet/{{ $entity['name'] }}" class="btn btn-info">Detail</a></td>
                             </tr>
                             @endforeach
                         </tbody>

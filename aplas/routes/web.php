@@ -46,9 +46,9 @@ Route::group(['middleware' => ['auth', 'teacher']], function() {
 	Route::get('/teacher/uploadsrc/{student}/{id}', 'StudentValidController@showsource');
  Route::resource('/teacher/rankview', 'StudentResultRankController');
 Route::resource('/teacher/jplasdown', 'JplasDownloadController');
-
 Route::resource('/teacher/completeness', 'StudentCompletenessController');
-
+Route::get('/teacher/studentres/{student}/{id}', 'StudentValidController@showteacher');
+Route::get('/teacher/studentdet/{student}', 'StudentMemberController@edit');
 });
 
 Route::group(['middleware' => ['auth', 'student']], function() {
