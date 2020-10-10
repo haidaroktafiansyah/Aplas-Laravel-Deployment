@@ -39,7 +39,7 @@
               </p>
             </a>
           </li>
-          
+
           <li class="nav-item">
             <a href="{{URL::to('teacher/member')}}" class="nav-link">
               <i class="nav-icon fas fa-inbox"></i>

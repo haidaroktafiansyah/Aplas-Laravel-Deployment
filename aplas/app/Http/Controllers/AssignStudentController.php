@@ -24,11 +24,12 @@ class AssignStudentController extends Controller
       $entities = \App\User::where('uplink','=',Auth::user()->id)->where('status','=','pending')->where('roleid','=','student')
             ->select('id', 'name', 'roleid', 'email')
             ->orderBy('name','asc')->get();
-      
+
       $classroom=\App\Classroom::where('owner','=',Auth::user()->id)
           ->pluck('name', 'id');
 
       $data=['entities'=>$entities, 'classroom'=>$classroom];
+
 
       return view('teacher/assignstudent/index')->with($data);
   }
@@ -67,7 +68,7 @@ class AssignStudentController extends Controller
       }
 
 
-      
+
       Session::flash('message','Validation for '.$x.' student(s) was succeed');
       return Redirect::to('teacher/assignstudent/index');
   }
