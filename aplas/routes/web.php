@@ -48,7 +48,8 @@ Route::group(['middleware' => ['auth', 'teacher']], function() {
 Route::resource('/teacher/jplasdown', 'JplasDownloadController');
 Route::resource('/teacher/completeness', 'StudentCompletenessController');
 Route::get('/teacher/studentres/{student}/{id}', 'StudentValidController@showteacher');
-Route::get('/teacher/studentdet/{student}', 'StudentMemberController@edit');
+Route::get('/teacher/studentdet/{student}', 'StudentMemberController@detail');
+Route::patch('/teacher/studentedit/{student}', 'StudentMemberController@edit');
 });
 
 Route::group(['middleware' => ['auth', 'student']], function() {

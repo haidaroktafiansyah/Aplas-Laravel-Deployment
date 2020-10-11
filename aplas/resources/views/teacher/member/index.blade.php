@@ -51,7 +51,7 @@
                                       @endif
                                     </div>
                                 </td>
-                            <td class="text-center"><a href="/teacher/studentdet/{{ $entity['name'] }}" class="btn btn-info">Detail</a></td>
+                            <td class="text-center"><a href="/teacher/studentdet/{{ $entity['id'] }}" class="btn btn-info">Detail</a></td>
                             </tr>
                             @endforeach
                         </tbody>

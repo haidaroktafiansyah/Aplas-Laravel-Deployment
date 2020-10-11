@@ -33,24 +33,37 @@ class StudentMemberController extends Controller
       return view('teacher/member/index')->with($data);
   }
 
-  public function edit($name)
+  public function detail($id)
   {
-    $entities=\App\User::where('users.uplink','=',Auth::user()->id)->where('users.status','=','active')
-    ->join('class_members','class_members.student','=','users.id')
-	->join('classrooms','classrooms.id','=','class_members.classid')
-    ->join('users as x','x.id','=','users.uplink')
-    ->select('users.id', 'users.name', 'users.roleid', 'users.email','users.status','classrooms.name as classname','x.name as teacher')
-    ->where('users.name',$name)
-    ->orderBy('users.name','asc')
-    ->get();
+    $entities=\App\User::where('users.id','=',$id)
+    ->join('class_members','users.id', '=', 'class_members.student')
+    ->join('classrooms','classrooms.id', '=', 'class_members.classid')
+    ->select('users.id','users.name','users.email','users.status','classrooms.name as classname')
+    ->orderBy('users.name','asc')->get();
 
     $classroom=\App\Classroom::where('owner','=',Auth::user()->id)
     ->pluck('name', 'id');
 
-    $data=['entity'=>$entities , 'classroom' => $classroom];
-    // dd($data);
+    $data=[ 'entity'=>$entities , 'classroom' => $classroom];
+    // dd($data,$id);
     return view('teacher/editstudent/index')->with($data);
   }
+
+  public function edit(Request $request)
+  {
+    $student = $request->get('invisible');
+    $class = $request->get('classroom');
+
+    // dd($student, $class);
+
+    $classroom=\App\ClassMember::where('student','=', $request->get('invisible'))
+    ->update([
+        'classid' => $request->get('classroom')
+    ]);
+
+    // dd($classroom);
+    return redirect('teacher/member');
+    }
 
   public function show()
   {

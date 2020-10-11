@@ -32,34 +32,45 @@
                                 </div>
                             </div>
                         @endforeach
-                        {{ Form::open(['route' => 'assignstudent.store', 'files' => true]) }}
-                        <div class="card-body">
-                            @if (Session::has('message'))
-                                <div id="alert-msg" class="alert alert-success alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">�</button>
-                                    {{ Session::get('message') }}
-                                </div>
-                            @endif
-                            <div class="form-row">
-                                <div class="input-group">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i>Validate as
-                                            Member of </button>
+                        <form method="post" action="/teacher/studentedit/{{ $entity->id }}">
+                            @method('patch')
+                            {{ csrf_field() }}
+                            <div class="card-body">
+                                @if (Session::has('message'))
+                                    <div id="alert-msg" class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true">�</button>
+                                        {{ Session::get('message') }}
                                     </div>
-                                    <div class="form-group">
-                                        <div class="input-group-text">Class</div>
+                                @endif
+
+                                <input name="invisible" type="hidden" value="{{ $entity['id'] }}">
+
+                                <div class="form-row">
+                                    <p class="card-text">Student Current Class : {{ $entity['classname'] }}</p>
+                                    <br />
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="form-group pb-2">
+                                        <div class="input-group-text">Change the class into :</div>
                                     </div>
                                     <div class="form-group">
                                         {!! Form::select('classroom', $classroom, null, ['class' => 'form-control']) !!}
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i> Validate to
+                                        move
+                                        the class </button>
+                                </div>
+
                             </div>
-                        </div>
-                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 
