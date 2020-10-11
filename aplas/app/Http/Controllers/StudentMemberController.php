@@ -51,10 +51,9 @@ class StudentMemberController extends Controller
 
   public function edit(Request $request)
   {
-    $student = $request->get('invisible');
-    $class = $request->get('classroom');
+    $student = $request->get('invisible2');
 
-    // dd($student, $class);
+    // dd($student);
 
     $classroom=\App\ClassMember::where('student','=', $request->get('invisible'))
     ->update([
@@ -62,7 +61,7 @@ class StudentMemberController extends Controller
     ]);
 
     // dd($classroom);
-    return redirect('teacher/member');
+    return redirect('teacher/member')->with('message', 'class of '.$student.' has been updated');;
     }
 
   public function show()

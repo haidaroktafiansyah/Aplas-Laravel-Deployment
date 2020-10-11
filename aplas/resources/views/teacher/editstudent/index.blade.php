@@ -45,6 +45,7 @@
                                 @endif
 
                                 <input name="invisible" type="hidden" value="{{ $entity['id'] }}">
+                                <input name="invisible2" type="hidden" value="{{ $entity['name'] }}">
 
                                 <div class="form-row">
                                     <p class="card-text">Student Current Class : {{ $entity['classname'] }}</p>
