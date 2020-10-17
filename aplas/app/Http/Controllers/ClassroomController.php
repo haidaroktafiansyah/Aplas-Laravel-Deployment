@@ -18,7 +18,7 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
+    //
         $entities=\App\Classroom::where('classrooms.owner','=',Auth::user()->id)
             ->leftJoin('class_members_group','classrooms.id','=','class_members_group.classid')
             ->select('classrooms.id','classrooms.name','classrooms.status','classrooms.desc','class_members_group.count')
